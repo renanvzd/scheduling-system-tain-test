@@ -8,7 +8,7 @@ export const Container = styled.div`
     'header header'
     'sidebar main'
     'footer footer';
-  height: 100vh; /* Isso garante que o layout ocupe toda a altura da tela */
+  height: 100vh;
 `;
 
 export const HeaderContainer = styled.header`

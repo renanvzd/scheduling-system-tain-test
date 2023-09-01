@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import { Container, HeaderContainer, SidebarContainer, MainContainer, FooterContainer } from "./styles";
 import { Header } from "@/components/Header";
-import { Sidebar } from "../Sidebar";
-import { Footer } from "../Footer";
+import { Sidebar } from "@/components/Sidebar";
+import { Footer } from "@/components/Footer";
 
 interface LayoutProps {
   children: ReactNode;
