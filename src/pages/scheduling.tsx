@@ -1,9 +1,13 @@
+import { Layout } from "@/components/Layout"
+
 export default function Scheduling() {
   return (
-    <main>
-      <div>
-        <p>Scheduling</p>
-      </div>
-    </main>
+    <Layout>
+      <main>
+        <div>
+          <p>Scheduling</p>
+        </div>
+      </main>
+    </Layout>
   )
 }

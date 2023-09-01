@@ -1,9 +1,13 @@
+import { Layout } from "@/components/Layout"
+
 export default function GamePresenters() {
   return (
-    <main>
-      <div>
-        <p>Game Presenters</p>
-      </div>
-    </main>
+    <Layout>
+      <main>
+        <div>
+          <p>Game Presenters</p>
+        </div>
+      </main>
+    </Layout>
   )
 }

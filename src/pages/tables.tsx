@@ -1,9 +1,13 @@
+import { Layout } from "@/components/Layout"
+
 export default function Tables() {
   return (
-    <main>
-      <div>
-        <p>Tables</p>
-      </div>
-    </main>
+    <Layout>
+      <main>
+        <div>
+          <p>Tables</p>
+        </div>
+      </main>
+    </Layout>
   )
 }
