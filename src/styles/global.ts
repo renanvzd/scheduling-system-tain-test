@@ -12,4 +12,14 @@ export default createGlobalStyle`
   body {
     font: 400 1rem 'Montserrat', sans-serif;
   }
+
+  button{
+    background: transparent;
+    border: none;
+  }
+  
+  button:focus{
+    outline: none;
+    border: none;
+  }
 `;
