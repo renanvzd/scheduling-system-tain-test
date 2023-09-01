@@ -1,13 +1,10 @@
 import { Layout } from "@/components/Layout"
+import { GamePresentersContent } from "@/components/GamePresentersContent"
 
 export default function GamePresenters() {
   return (
     <Layout>
-      <main>
-        <div>
-          <p>Game Presenters</p>
-        </div>
-      </main>
+      <GamePresentersContent />
     </Layout>
   )
 }
