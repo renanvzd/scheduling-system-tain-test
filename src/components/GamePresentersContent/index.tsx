@@ -1,12 +1,28 @@
+import { useEffect, useState } from 'react';
+import api from "@/services/api";
+
 import { Container, Header, TableContainer } from "./styles";
 
-const employees = [
-  { ID: 1, Name: 'Game Presenter 1', Age: 30, AdmissionDate: '2023-01-09' },
-  { ID: 2, Name: 'Game Presenter 2', Age: 30, AdmissionDate: '2023-01-09' },
-  { ID: 3, Name: 'Game Presenter 3', Age: 30, AdmissionDate: '2023-01-09' },
-];
+interface IEmployees {
+  id: number;
+  name: string;
+  age: string;
+  admissionDate: string;
+}
 
 export function GamePresentersContent() {
+  const [employees, setEmployees] = useState<IEmployees[]>([]);
+
+  useEffect(() => {
+    async function getEmployees() {
+      const response = await api.get('/employees');
+
+      setEmployees(response.data);
+    }
+
+    getEmployees()
+  }, [])
+
   return (
     <Container>
       <div>
@@ -35,11 +51,11 @@ export function GamePresentersContent() {
             </thead>
             <tbody>
               {employees.map((employee) => (
-                <tr key={employee.ID}>
-                  <td>{employee.ID}</td>
-                  <td>{employee.Name}</td>
-                  <td>{employee.Age}</td>
-                  <td>{employee.AdmissionDate}</td>
+                <tr key={employee.id}>
+                  <td>{employee.id}</td>
+                  <td>{employee.name}</td>
+                  <td>{employee.age}</td>
+                  <td>{employee.admissionDate}</td>
                   <td>Edit</td>
                   <td>Delete</td>
                 </tr>

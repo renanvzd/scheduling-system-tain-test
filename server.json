@@ -1,0 +1,16 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Game Presenter 1",
+      "age": "30",
+      "admissionDate": "2023-31-08"
+    },
+    {
+      "id": 2,
+      "name": "Game Presenter 2",
+      "age": "30",
+      "admissionDate": "2023-01-09"
+    }
+  ]
+}
