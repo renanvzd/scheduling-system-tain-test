@@ -1,4 +1,4 @@
-import { FiTrash } from 'react-icons/fi';
+import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container, TableContainer } from "./styles";
 
@@ -11,10 +11,12 @@ interface IEmployees {
 
 interface EmployeeProps {
   employees: IEmployees[];
+  handleEditEmployee: (employees: IEmployees) => void;
   handleDelete: (id: number) => {};
 }
 
-export function GamePresentersContent({ employees, handleDelete }: EmployeeProps) {
+export function GamePresentersContent({ employees, handleEditEmployee, handleDelete }: EmployeeProps) {
+
   return (
     <Container>
       <div>
@@ -37,7 +39,15 @@ export function GamePresentersContent({ employees, handleDelete }: EmployeeProps
                   <td>{employee.name}</td>
                   <td>{employee.age}</td>
                   <td>{employee.admissionDate}</td>
-                  <td>Edit</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="icon"
+                      onClick={() => handleEditEmployee(employee)}
+                    >
+                      <FiEdit3 size={20} />
+                    </button>
+                  </td>
                   <td>
                     <button
                       type="button"
