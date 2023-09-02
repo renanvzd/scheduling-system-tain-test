@@ -1,9 +1,64 @@
-import { Container } from "./styles";
+import { FiEdit3, FiTrash } from 'react-icons/fi';
 
-export function CasinoTablesList() {
+import { Container, TableContainer } from "./styles";
+
+interface ICasinoTable {
+  id: number;
+  tableNumber: string;
+  game: string;
+  creationDate: string;
+}
+
+interface CasinoTableProps {
+  tables: ICasinoTable[];
+}
+
+export function CasinoTablesList({ tables }: CasinoTableProps) {
+
   return (
     <Container>
-      <p>Casino Tables</p>
+      <div>
+        <TableContainer>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Table Number</th>
+                <th>Game</th>
+                <th>Creation Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tables?.map((table) => (
+                <tr key={table.id}>
+                  <td>{table.id}</td>
+                  <td>{table.tableNumber}</td>
+                  <td>{table.game}</td>
+                  <td>{table.creationDate}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="icon"
+                    >
+                      <FiEdit3 size={20} />
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className="icon"
+                    >
+                      <FiTrash size={20} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </TableContainer>
+      </div>
     </Container>
-  )
+  );
 }

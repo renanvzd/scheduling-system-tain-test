@@ -18,5 +18,25 @@
       "admissionDate": "2023-02-09",
       "id": 3
     }
+  ],
+  "casino-tables": [
+    {
+      "id": 1,
+      "tableNumber": "Table 1",
+      "game": "Blackjack",
+      "creationDate": "2023-02-09"
+    },
+    {
+      "id": 2,
+      "tableNumber": "Table 2",
+      "game": "Blackjack",
+      "creationDate": "2023-02-09"
+    },
+    {
+      "id": 3,
+      "tableNumber": "Table 3",
+      "game": "Blackjack",
+      "creationDate": "2023-02-09"
+    }
   ]
 }
