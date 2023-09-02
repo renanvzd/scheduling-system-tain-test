@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import api from "@/services/api";
 
 import { Layout } from "@/components/Layout"
-import { GamePresentersContent } from "@/components/GamePresentersContent"
-import { ModalAddEmployee } from "@/components/ModalAddEmployee";
-import { ButtonAddEmployee } from "@/components/ButtonAddEmployee"
+import { GamePresentersList } from "@/components/GamePresenters/ProfileList"
+import { ModalAddEmployee } from "@/components/GamePresenters/ModalAddEmployee";
+import { ModalEditEmployee } from "@/components/GamePresenters/ModalEditEmployee";
+import { ButtonAddEmployee } from "@/components/GamePresenters/ButtonAddEmployee"
 
 import { Header } from "../styles/styles";
 
@@ -18,6 +19,8 @@ interface IEmployees {
 export default function GamePresenters() {
   const [employees, setEmployees] = useState<IEmployees[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState<IEmployees>({} as IEmployees);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   useEffect(() => {
     async function getEmployees() {
@@ -32,6 +35,16 @@ export default function GamePresenters() {
     setModalOpen(!modalOpen);
   }
 
+  const toggleEditModal = () => {
+    setEditModalOpen(!editModalOpen);
+  }
+
+  const handleEditEmployee = (employee: IEmployees) => {
+    setEditModalOpen(true);
+    setEditingEmployee(employee);
+  }
+
+
   async function handleAddEmployee(employee: Omit<IEmployees, 'id'>,): Promise<void> {
     try {
       const response = await api.post('/employees', {
@@ -39,6 +52,23 @@ export default function GamePresenters() {
       });
 
       setEmployees([...employees, response.data]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleUpdateEmployee = async (employee: Omit<IEmployees, 'id'>): Promise<void> => {
+    try {
+      const employeeUpdated = await api.put(
+        `/employees/${editingEmployee.id}`,
+        { ...editingEmployee, ...employee },
+      );
+
+      const employeesUpdated = employees.map(employee =>
+        employee.id !== employeeUpdated.data.id ? employee : employeeUpdated.data,
+      );
+
+      setEmployees(employeesUpdated);
     } catch (err) {
       console.log(err);
     }
@@ -65,8 +95,15 @@ export default function GamePresenters() {
         setIsOpen={toggleModal}
         handleAddEmployee={handleAddEmployee}
       />
-      <GamePresentersContent
+      <ModalEditEmployee
+        isOpen={editModalOpen}
+        setIsOpen={toggleEditModal}
+        editingEmployee={editingEmployee}
+        handleUpdateEmployee={handleUpdateEmployee}
+      />
+      <GamePresentersList
         employees={employees}
+        handleEditEmployee={handleEditEmployee}
         handleDelete={handleDeleteEmployee}
       />
     </Layout>

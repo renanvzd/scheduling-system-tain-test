@@ -15,7 +15,7 @@ interface EmployeeProps {
   handleDelete: (id: number) => {};
 }
 
-export function GamePresentersContent({ employees, handleEditEmployee, handleDelete }: EmployeeProps) {
+export function GamePresentersList({ employees, handleEditEmployee, handleDelete }: EmployeeProps) {
 
   return (
     <Container>
