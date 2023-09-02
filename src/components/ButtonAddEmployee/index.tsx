@@ -1,6 +1,12 @@
+import { FiPlusSquare } from 'react-icons/fi';
+
 import { Container } from './styles';
 
-export function ButtonAddEmployee() {
+interface ButtonAddEmployeeProps {
+  openModal: () => void
+}
+
+export function ButtonAddEmployee({ openModal }: ButtonAddEmployeeProps) {
   return (
     <Container>
       <header>
@@ -8,9 +14,10 @@ export function ButtonAddEmployee() {
           <div>
             <button
               type="button"
+              onClick={openModal}
             >
               <div className="icon">
-                +
+                <FiPlusSquare size={24} />
               </div>
               <div className="text">New Game Presenter</div>
             </button>

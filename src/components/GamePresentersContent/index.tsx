@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from "@/services/api";
 
-import { Container, Header, TableContainer } from "./styles";
+import { Container, TableContainer } from "./styles";
 
 interface IEmployees {
   id: number;
@@ -26,18 +26,7 @@ export function GamePresentersContent() {
   return (
     <Container>
       <div>
-        <Header>
-          <p>Game Presenters</p>
-        </Header>
-      </div>
-
-      <div>
         <TableContainer>
-          <div className="add-button">
-            <button>
-              Add new Game Presenter
-            </button>
-          </div>
           <table>
             <thead>
               <tr>
