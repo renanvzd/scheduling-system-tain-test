@@ -37,12 +37,6 @@
       "tableNumber": "Table 3",
       "game": "Blackjack",
       "creationDate": "2023-02-09"
-    },
-    {
-      "tableNumber": "Table 4",
-      "game": "Blackjack",
-      "creationDate": "2023-02-09",
-      "id": 4
     }
   ]
 }

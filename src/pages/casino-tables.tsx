@@ -45,6 +45,14 @@ export default function Tables() {
     }
   }
 
+  const handleDeleteTable = async (id: number) => {
+    await api.delete(`/casino-tables/${id}`);
+
+    const employeesFiltered = tables.filter(table => table.id !== id);
+
+    setTables(employeesFiltered);
+  }
+
   return (
     <Layout>
       <Header>
@@ -56,7 +64,10 @@ export default function Tables() {
         setIsOpen={toggleModal}
         handleAddTable={handleAddTable}
       />
-      <CasinoTablesList tables={tables} />
+      <CasinoTablesList
+        tables={tables}
+        handleDelete={handleDeleteTable}
+      />
     </Layout>
   )
 }
