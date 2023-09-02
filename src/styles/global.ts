@@ -16,6 +16,7 @@ export default createGlobalStyle`
   button{
     background: transparent;
     border: none;
+    cursor: pointer;
   }
   
   button:focus{
