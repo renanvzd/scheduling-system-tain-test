@@ -16,8 +16,8 @@ export function Sidebar() {
           <Link href="/game-presenters" rel="noreferrer">
             <button>Game Presenters</button>
           </Link>
-          <Link href="/tables" rel="noreferrer">
-            <button>Tables</button>
+          <Link href="/casino-tables" rel="noreferrer">
+            <button>Casino Tables</button>
           </Link>
           <Link href="/scheduling" rel="noreferrer">
             <button>Scheduling</button>
