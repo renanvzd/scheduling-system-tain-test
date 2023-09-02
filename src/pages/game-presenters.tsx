@@ -28,6 +28,9 @@ export default function GamePresenters() {
     getEmployees()
   }, [])
 
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  }
 
   async function handleAddEmployee(employee: Omit<IEmployees, 'id'>,): Promise<void> {
     try {
@@ -41,8 +44,12 @@ export default function GamePresenters() {
     }
   }
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
+  const handleDeleteEmployee = async (id: number) => {
+    await api.delete(`/employees/${id}`);
+
+    const employeesFiltered = employees.filter(employee => employee.id !== id);
+
+    setEmployees(employeesFiltered);
   }
 
   return (
@@ -58,7 +65,10 @@ export default function GamePresenters() {
         setIsOpen={toggleModal}
         handleAddEmployee={handleAddEmployee}
       />
-      <GamePresentersContent />
+      <GamePresentersContent
+        employees={employees}
+        handleDelete={handleDeleteEmployee}
+      />
     </Layout>
   )
 }

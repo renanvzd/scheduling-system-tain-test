@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import api from "@/services/api";
+import { FiTrash } from 'react-icons/fi';
 
 import { Container, TableContainer } from "./styles";
 
@@ -10,19 +9,12 @@ interface IEmployees {
   admissionDate: string;
 }
 
-export function GamePresentersContent() {
-  const [employees, setEmployees] = useState<IEmployees[]>([]);
+interface EmployeeProps {
+  employees: IEmployees[];
+  handleDelete: (id: number) => {};
+}
 
-  useEffect(() => {
-    async function getEmployees() {
-      const response = await api.get('/employees');
-
-      setEmployees(response.data);
-    }
-
-    getEmployees()
-  }, [])
-
+export function GamePresentersContent({ employees, handleDelete }: EmployeeProps) {
   return (
     <Container>
       <div>
@@ -39,14 +31,22 @@ export function GamePresentersContent() {
               </tr>
             </thead>
             <tbody>
-              {employees.map((employee) => (
+              {employees?.map((employee) => (
                 <tr key={employee.id}>
                   <td>{employee.id}</td>
                   <td>{employee.name}</td>
                   <td>{employee.age}</td>
                   <td>{employee.admissionDate}</td>
                   <td>Edit</td>
-                  <td>Delete</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="icon"
+                      onClick={() => handleDelete(employee.id)}
+                    >
+                      <FiTrash size={20} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
