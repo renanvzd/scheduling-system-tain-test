@@ -11,10 +11,11 @@ interface ICasinoTable {
 
 interface CasinoTableProps {
   tables: ICasinoTable[];
+  handleEditTable: (tables: ICasinoTable) => void;
   handleDelete: (id: number) => {};
 }
 
-export function CasinoTablesList({ tables, handleDelete }: CasinoTableProps) {
+export function CasinoTablesList({ tables, handleEditTable, handleDelete }: CasinoTableProps) {
 
   return (
     <Container>
@@ -42,6 +43,7 @@ export function CasinoTablesList({ tables, handleDelete }: CasinoTableProps) {
                     <button
                       type="button"
                       className="icon"
+                      onClick={() => handleEditTable(table)}
                     >
                       <FiEdit3 size={20} />
                     </button>
