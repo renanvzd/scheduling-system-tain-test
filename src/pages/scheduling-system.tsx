@@ -1,5 +1,5 @@
 import { Layout } from "@/components/Layout"
-import { Scheduling } from "@/components/Scheduling"
+import { ShiftTable } from "@/components/Scheduling/ShiftTable"
 
 import { Header } from "../styles/styles";
 
@@ -9,7 +9,7 @@ export default function SchedulingSystem() {
       <Header>
         <p>Scheduling System</p>
       </Header>
-      <Scheduling />
+      <ShiftTable />
     </Layout>
   )
 }
