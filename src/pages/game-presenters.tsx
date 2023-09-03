@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import api from "@/services/api";
+import { useState } from "react";
+import { useDataContext } from '@/context/data-context';
 
-import { Layout } from "@/components/Layout"
-import { GamePresentersList } from "@/components/GamePresenters/ProfileList"
+import { Layout } from "@/components/Layout";
+import { GamePresentersList } from "@/components/GamePresenters/ProfileList";
 import { ModalAddEmployee } from "@/components/GamePresenters/ModalAddEmployee";
 import { ModalEditEmployee } from "@/components/GamePresenters/ModalEditEmployee";
-import { ButtonAddEmployee } from "@/components/GamePresenters/ButtonAddEmployee"
+import { ButtonAddEmployee } from "@/components/GamePresenters/ButtonAddEmployee";
 
 import { Header } from "../styles/styles";
 
@@ -17,19 +17,10 @@ interface IEmployees {
 }
 
 export default function GamePresenters() {
-  const [employees, setEmployees] = useState<IEmployees[]>([]);
+  const { employees, addEmployee, updateEmployee, deleteEmployee } = useDataContext();
   const [modalOpen, setModalOpen] = useState(false);
-  const [editingEmployee, setEditingEmployee] = useState<IEmployees>({} as IEmployees);
+  const [editingEmployee, setEditingEmployee] = useState<IEmployees | {}>({});
   const [editModalOpen, setEditModalOpen] = useState(false);
-
-  useEffect(() => {
-    async function getEmployees() {
-      const response = await api.get('/employees');
-
-      setEmployees(response.data);
-    }
-    getEmployees()
-  }, [])
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
@@ -44,42 +35,18 @@ export default function GamePresenters() {
     setEditingEmployee(employee);
   }
 
-
-  async function handleAddEmployee(employee: Omit<IEmployees, 'id'>,): Promise<void> {
-    try {
-      const response = await api.post('/employees', {
-        ...employee,
-      });
-
-      setEmployees([...employees, response.data]);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleAddEmployee = async (employee: Omit<IEmployees, 'id'>) => {
+    await addEmployee(employee);
   }
 
-  const handleUpdateEmployee = async (employee: Omit<IEmployees, 'id'>): Promise<void> => {
-    try {
-      const employeeUpdated = await api.put(
-        `/employees/${editingEmployee.id}`,
-        { ...editingEmployee, ...employee },
-      );
-
-      const employeesUpdated = employees.map(employee =>
-        employee.id !== employeeUpdated.data.id ? employee : employeeUpdated.data,
-      );
-
-      setEmployees(employeesUpdated);
-    } catch (err) {
-      console.log(err);
+  const handleUpdateEmployee = async (employee: Omit<IEmployees, 'id'>) => {
+    if ('id' in editingEmployee) {
+      await updateEmployee({ ...editingEmployee, ...employee } as IEmployees);
     }
   }
 
   const handleDeleteEmployee = async (id: number) => {
-    await api.delete(`/employees/${id}`);
-
-    const employeesFiltered = employees.filter(employee => employee.id !== id);
-
-    setEmployees(employeesFiltered);
+    await deleteEmployee(id);
   }
 
   return (
@@ -98,7 +65,7 @@ export default function GamePresenters() {
       <ModalEditEmployee
         isOpen={editModalOpen}
         setIsOpen={toggleEditModal}
-        editingEmployee={editingEmployee}
+        editingEmployee={editingEmployee as IEmployees}
         handleUpdateEmployee={handleUpdateEmployee}
       />
       <GamePresentersList

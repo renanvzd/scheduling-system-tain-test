@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
+import { DataContextProvider } from "@/context/data-context";
+
 import GlobalStyles from '../styles/global';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,8 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Component {...pageProps} />
-      <GlobalStyles />
+      <DataContextProvider>
+        <Component {...pageProps} />
+        <GlobalStyles />
+      </DataContextProvider>
     </>
   );
 }
