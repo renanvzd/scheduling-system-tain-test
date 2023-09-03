@@ -3,13 +3,13 @@ import { useDataContext } from '@/context/data-context';
 
 import { Layout } from "@/components/Layout";
 import { GamePresentersList } from "@/components/GamePresenters/ProfileList";
-import { ModalAddEmployee } from "@/components/GamePresenters/ModalAddEmployee";
-import { ModalEditEmployee } from "@/components/GamePresenters/ModalEditEmployee";
-import { ButtonAddEmployee } from "@/components/GamePresenters/ButtonAddEmployee";
+import { ModalAddGamePresenter } from "@/components/GamePresenters/ModalAddGamePresenter";
+import { ModalEditGamePresenter } from "@/components/GamePresenters/ModalEditGamePresenter";
+import { ButtonAddGamePresenter } from "@/components/GamePresenters/ButtonAddGamePresenter";
 
 import { Header } from "../styles/styles";
 
-interface IEmployees {
+interface IGamePresenters {
   id: number;
   name: string;
   age: string;
@@ -17,9 +17,9 @@ interface IEmployees {
 }
 
 export default function GamePresenters() {
-  const { employees, addEmployee, updateEmployee, deleteEmployee } = useDataContext();
+  const { gamePresenters, addGamePresenter, updateGamePresenter, deleteGamePresenter } = useDataContext();
   const [modalOpen, setModalOpen] = useState(false);
-  const [editingEmployee, setEditingEmployee] = useState<IEmployees | {}>({});
+  const [editingGamePresenter, setEditingGamePresenter] = useState<IGamePresenters | {}>({});
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -30,23 +30,23 @@ export default function GamePresenters() {
     setEditModalOpen(!editModalOpen);
   }
 
-  const handleEditEmployee = (employee: IEmployees) => {
+  const handleEditGamePresenter = (gamePresenter: IGamePresenters) => {
     setEditModalOpen(true);
-    setEditingEmployee(employee);
+    setEditingGamePresenter(gamePresenter);
   }
 
-  const handleAddEmployee = async (employee: Omit<IEmployees, 'id'>) => {
-    await addEmployee(employee);
+  const handleAddGamePresenter = async (gamePresenter: Omit<IGamePresenters, 'id'>) => {
+    await addGamePresenter(gamePresenter);
   }
 
-  const handleUpdateEmployee = async (employee: Omit<IEmployees, 'id'>) => {
-    if ('id' in editingEmployee) {
-      await updateEmployee({ ...editingEmployee, ...employee } as IEmployees);
+  const handleUpdateGamePresenter = async (gamePresenter: Omit<IGamePresenters, 'id'>) => {
+    if ('id' in editingGamePresenter) {
+      await updateGamePresenter({ ...editingGamePresenter, ...gamePresenter } as IGamePresenters);
     }
   }
 
-  const handleDeleteEmployee = async (id: number) => {
-    await deleteEmployee(id);
+  const handleDeleteGamePresenter = async (id: number) => {
+    await deleteGamePresenter(id);
   }
 
   return (
@@ -56,22 +56,22 @@ export default function GamePresenters() {
           <p>Game Presenters</p>
         </Header>
       </div>
-      <ButtonAddEmployee openModal={toggleModal} />
-      <ModalAddEmployee
+      <ButtonAddGamePresenter openModal={toggleModal} />
+      <ModalAddGamePresenter
         isOpen={modalOpen}
         setIsOpen={toggleModal}
-        handleAddEmployee={handleAddEmployee}
+        handleAddGamePresenter={handleAddGamePresenter}
       />
-      <ModalEditEmployee
+      <ModalEditGamePresenter
         isOpen={editModalOpen}
         setIsOpen={toggleEditModal}
-        editingEmployee={editingEmployee as IEmployees}
-        handleUpdateEmployee={handleUpdateEmployee}
+        editingGamePresenter={editingGamePresenter as IGamePresenters}
+        handleUpdateGamePresenter={handleUpdateGamePresenter}
       />
       <GamePresentersList
-        employees={employees}
-        handleEditEmployee={handleEditEmployee}
-        handleDelete={handleDeleteEmployee}
+        gamePresenters={gamePresenters}
+        handleEditGamePresenter={handleEditGamePresenter}
+        handleDelete={handleDeleteGamePresenter}
       />
     </Layout>
   )

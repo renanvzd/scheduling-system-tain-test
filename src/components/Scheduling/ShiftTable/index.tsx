@@ -13,7 +13,7 @@ interface GamePresenter {
 }
 
 export function ShiftTable() {
-  const { employees, casinoTables } = useDataContext();
+  const { gamePresenters, casinoTables } = useDataContext();
   const startTimeShift = 8 * 60;    // From: 08 a.m.
   const endTimeShift = 15.8 * 60;   // To:   16 p.m.
   const interval = 20;
@@ -85,7 +85,7 @@ export function ShiftTable() {
               </tr>
             </thead>
             <tbody>
-              {renderScheduleRows(employees, timeSlots, casinoTables)}
+              {renderScheduleRows(gamePresenters, timeSlots, casinoTables)}
             </tbody>
           </table>
         </TableContainer>

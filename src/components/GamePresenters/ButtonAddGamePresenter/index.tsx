@@ -2,11 +2,11 @@ import { FiPlusSquare } from 'react-icons/fi';
 
 import { Container } from './styles';
 
-interface ButtonAddEmployeeProps {
+interface ButtonAddGamePresenterProps {
   openModal: () => void
 }
 
-export function ButtonAddEmployee({ openModal }: ButtonAddEmployeeProps) {
+export function ButtonAddGamePresenter({ openModal }: ButtonAddGamePresenterProps) {
   return (
     <Container>
       <header>

@@ -20,14 +20,14 @@ interface ITables {
   creationDate: string;
 }
 
-interface ModalEditEmployeeProps {
+interface ModalEditGamePresenterProps {
   isOpen: boolean;
   setIsOpen: () => void;
   handleUpdateTable: (data: AddTable) => void;
   editingTable: ITables;
 }
 
-export function ModalEditTable({ isOpen, setIsOpen, handleUpdateTable, editingTable }: ModalEditEmployeeProps) {
+export function ModalEditTable({ isOpen, setIsOpen, handleUpdateTable, editingTable }: ModalEditGamePresenterProps) {
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = async (data: AddTable) => {

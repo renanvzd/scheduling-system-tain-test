@@ -7,39 +7,39 @@ import { Input } from '@/components/Input';
 import { FormHandles } from '@unform/core';
 
 
-interface AddEmployee {
+interface AddGamePresenters {
   name: string;
   age: string;
   admissionDate: string;
 }
 
-interface IEmployees {
+interface IGamePresenters {
   id: number;
   name: string;
   age: string;
   admissionDate: string;
 }
 
-interface ModalEditEmployeeProps {
+interface ModalEditGamePresenterProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleUpdateEmployee: (data: AddEmployee) => void;
-  editingEmployee: IEmployees;
+  handleUpdateGamePresenter: (data: AddGamePresenters) => void;
+  editingGamePresenter: IGamePresenters;
 }
 
-export function ModalEditEmployee({ isOpen, setIsOpen, handleUpdateEmployee, editingEmployee }: ModalEditEmployeeProps) {
+export function ModalEditGamePresenter({ isOpen, setIsOpen, handleUpdateGamePresenter, editingGamePresenter }: ModalEditGamePresenterProps) {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = async (data: AddEmployee) => {
-    handleUpdateEmployee(data);
+  const handleSubmit = async (data: AddGamePresenters) => {
+    handleUpdateGamePresenter(data);
     setIsOpen();
   };
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Form ref={formRef} onSubmit={handleSubmit} initialData={editingEmployee}>
+      <Form ref={formRef} onSubmit={handleSubmit} initialData={editingGamePresenter}>
         <p className='modal-title'>Edit Game Presenter</p>
-        <Input name="name" placeholder="Employee name" />
+        <Input name="name" placeholder="Game presenter name" />
         <Input name="age" placeholder="Age" />
         <Input name="admissionDate" placeholder="Admission date" />
 

@@ -2,20 +2,20 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container, TableContainer } from "./styles";
 
-interface IEmployees {
+interface IGamePresenters {
   id: number;
   name: string;
   age: string;
   admissionDate: string;
 }
 
-interface EmployeeProps {
-  employees: IEmployees[];
-  handleEditEmployee: (employees: IEmployees) => void;
+interface GamePresenterProps {
+  gamePresenters: IGamePresenters[];
+  handleEditGamePresenter: (gamePresenters: IGamePresenters) => void;
   handleDelete: (id: number) => {};
 }
 
-export function GamePresentersList({ employees, handleEditEmployee, handleDelete }: EmployeeProps) {
+export function GamePresentersList({ gamePresenters, handleEditGamePresenter, handleDelete }: GamePresenterProps) {
 
   return (
     <Container>
@@ -33,17 +33,17 @@ export function GamePresentersList({ employees, handleEditEmployee, handleDelete
               </tr>
             </thead>
             <tbody>
-              {employees?.map((employee) => (
-                <tr key={employee.id}>
-                  <td>{employee.id}</td>
-                  <td>{employee.name}</td>
-                  <td>{employee.age}</td>
-                  <td>{employee.admissionDate}</td>
+              {gamePresenters?.map((gamePresenter) => (
+                <tr key={gamePresenter.id}>
+                  <td>{gamePresenter.id}</td>
+                  <td>{gamePresenter.name}</td>
+                  <td>{gamePresenter.age}</td>
+                  <td>{gamePresenter.admissionDate}</td>
                   <td>
                     <button
                       type="button"
                       className="icon"
-                      onClick={() => handleEditEmployee(employee)}
+                      onClick={() => handleEditGamePresenter(gamePresenter)}
                     >
                       <FiEdit3 size={20} />
                     </button>
@@ -52,7 +52,7 @@ export function GamePresentersList({ employees, handleEditEmployee, handleDelete
                     <button
                       type="button"
                       className="icon"
-                      onClick={() => handleDelete(employee.id)}
+                      onClick={() => handleDelete(gamePresenter.id)}
                     >
                       <FiTrash size={20} />
                     </button>

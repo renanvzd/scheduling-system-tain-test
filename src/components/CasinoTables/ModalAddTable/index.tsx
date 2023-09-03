@@ -12,13 +12,13 @@ interface AddTable {
   creationDate: string;
 }
 
-interface ModalAddEmployee {
+interface ModalAddTable {
   isOpen: boolean;
   setIsOpen: () => void;
   handleAddTable: (data: AddTable) => void;
 }
 
-export function ModalAddTable({ isOpen, setIsOpen, handleAddTable }: ModalAddEmployee) {
+export function ModalAddTable({ isOpen, setIsOpen, handleAddTable }: ModalAddTable) {
 
   const handleSubmit = async (data: AddTable) => {
     handleAddTable(data);

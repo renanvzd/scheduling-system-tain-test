@@ -6,22 +6,22 @@ import { Modal } from '@/components/Modal';
 import { Input } from '@/components/Input';
 import { Form } from './styles';
 
-interface AddEmployee {
+interface AddGamePresenter {
   name: string;
   age: string;
   admissionDate: string;
 }
 
-interface ModalAddEmployee {
+interface ModalAddGamePresenter {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleAddEmployee: (data: AddEmployee) => void;
+  handleAddGamePresenter: (data: AddGamePresenter) => void;
 }
 
-export function ModalAddEmployee({ isOpen, setIsOpen, handleAddEmployee }: ModalAddEmployee) {
+export function ModalAddGamePresenter({ isOpen, setIsOpen, handleAddGamePresenter }: ModalAddGamePresenter) {
 
-  const handleSubmit = async (data: AddEmployee) => {
-    handleAddEmployee(data);
+  const handleSubmit = async (data: AddGamePresenter) => {
+    handleAddGamePresenter(data);
     setIsOpen();
   };
 
@@ -31,7 +31,7 @@ export function ModalAddEmployee({ isOpen, setIsOpen, handleAddEmployee }: Modal
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <p className='modal-title'>New Game Presenter</p>
-        <Input name="name" placeholder="Employee name" />
+        <Input name="name" placeholder="Game presenter name" />
         <Input name="age" placeholder="Age" />
 
         <Input name="admissionDate" placeholder="Admission date" />
@@ -39,7 +39,7 @@ export function ModalAddEmployee({ isOpen, setIsOpen, handleAddEmployee }: Modal
           <div className="icon">
             <FiCheckSquare size={24} />
           </div>
-          <p className="text-button">Add new employee</p>
+          <p className="text-button">Add new game presenter</p>
         </button>
       </Form>
     </Modal>

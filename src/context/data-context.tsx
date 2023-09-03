@@ -5,7 +5,7 @@ interface DataContextProviderProps {
   children: React.ReactNode;
 }
 
-interface IEmployees {
+interface IGamePresenter {
   id: number;
   name: string;
   age: string;
@@ -20,10 +20,10 @@ interface ICasinoTable {
 }
 
 interface DataContextType {
-  employees: IEmployees[];
-  addEmployee: (employee: Omit<IEmployees, 'id'>) => Promise<void>;
-  updateEmployee: (employee: IEmployees) => Promise<void>;
-  deleteEmployee: (id: number) => Promise<void>;
+  gamePresenters: IGamePresenter[];
+  addGamePresenter: (gamePresenter: Omit<IGamePresenter, 'id'>) => Promise<void>;
+  updateGamePresenter: (gamePresenter: IGamePresenter) => Promise<void>;
+  deleteGamePresenter: (id: number) => Promise<void>;
 
   casinoTables: ICasinoTable[];
   addCasinoTable: (casinoTable: Omit<ICasinoTable, 'id'>) => Promise<void>;
@@ -34,13 +34,13 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataContextProvider: React.FC<DataContextProviderProps> = ({ children }) => {
-  const [employees, setEmployees] = useState<IEmployees[]>([]);
+  const [gamePresenters, setGamePresenters] = useState<IGamePresenter[]>([]);
   const [casinoTables, setCasinoTables] = useState<ICasinoTable[]>([]);
 
-  const getEmployees = async () => {
+  const getGamePresenters = async () => {
     try {
-      const response = await api.get<IEmployees[]>('/employees');
-      setEmployees(response.data);
+      const response = await api.get<IGamePresenter[]>('/game-presenters');
+      setGamePresenters(response.data);
     } catch (err) {
       console.error(err);
     }
@@ -55,13 +55,13 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({ childr
     }
   };
 
-  const addEmployee = async (employee: Omit<IEmployees, 'id'>) => {
+  const addGamePresenter = async (gamePresenter: Omit<IGamePresenter, 'id'>) => {
     try {
-      const response = await api.post('/employees', {
-        ...employee,
+      const response = await api.post('/game-presenters', {
+        ...gamePresenter,
       });
 
-      setEmployees([...employees, response.data]);
+      setGamePresenters([...gamePresenters, response.data]);
     } catch (err) {
       console.log(err);
     }
@@ -79,16 +79,16 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({ childr
     }
   };
 
-  const updateEmployee = async (employee: IEmployees) => {
+  const updateGamePresenter = async (gamePresenter: IGamePresenter) => {
     try {
-      const response = await api.put<IEmployees>(
-        `/employees/${employee.id}`,
-        employee
+      const response = await api.put<IGamePresenter>(
+        `/game-presenters/${gamePresenter.id}`,
+        gamePresenter
       );
-      const updatedEmployees = employees.map((emp) =>
+      const updatedGamePresenters = gamePresenters.map((emp) =>
         emp.id === response.data.id ? response.data : emp
       );
-      setEmployees(updatedEmployees);
+      setGamePresenters(updatedGamePresenters);
     } catch (err) {
       console.error(err);
     }
@@ -109,11 +109,11 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({ childr
     }
   };
 
-  const deleteEmployee = async (id: number) => {
+  const deleteGamePresenter = async (id: number) => {
     try {
-      await api.delete(`/employees/${id}`);
-      const updatedEmployees = employees.filter((emp) => emp.id !== id);
-      setEmployees(updatedEmployees);
+      await api.delete(`/game-presenters/${id}`);
+      const updatedGamePresenters = gamePresenters.filter((gp) => gp.id !== id);
+      setGamePresenters(updatedGamePresenters);
     } catch (err) {
       console.error(err);
     }
@@ -130,17 +130,17 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({ childr
   };
 
   useEffect(() => {
-    getEmployees();
+    getGamePresenters();
     getCasinoTables();
   }, []);
 
   return (
     <DataContext.Provider
       value={{
-        employees,
-        addEmployee,
-        updateEmployee,
-        deleteEmployee,
+        gamePresenters,
+        addGamePresenter,
+        updateGamePresenter,
+        deleteGamePresenter,
         casinoTables,
         addCasinoTable,
         updateCasinoTable,
