@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Container, HeaderContainer, SidebarContainer, MainContainer, FooterContainer } from "./styles";
 import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
