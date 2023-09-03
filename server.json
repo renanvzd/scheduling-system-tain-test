@@ -2,18 +2,18 @@
   "employees": [
     {
       "id": 1,
-      "name": "Game Presenter 1",
+      "name": "GP 1",
       "age": "30",
       "admissionDate": "2023-31-08"
     },
     {
-      "name": "Game Presenter 2",
+      "name": "GP 2",
       "age": "36",
       "admissionDate": "2023-01-09",
       "id": 2
     },
     {
-      "name": "Game Presenter 3",
+      "name": "GP 3",
       "age": "40",
       "admissionDate": "2023-02-09",
       "id": 3
@@ -34,7 +34,7 @@
     },
     {
       "id": 3,
-      "tableNumber": "Table 3 Updated",
+      "tableNumber": "Table 3",
       "game": "Blackjack",
       "creationDate": "2023-02-09"
     }

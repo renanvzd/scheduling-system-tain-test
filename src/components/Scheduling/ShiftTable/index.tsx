@@ -1,7 +1,8 @@
-import React from "react";
+import { useDataContext } from '@/context/data-context';
+
 import { Container, TableContainer } from "./styles";
 
-interface Table {
+interface CasinoTable {
   id: number;
   tableNumber: string;
 }
@@ -11,19 +12,8 @@ interface GamePresenter {
   name: string;
 }
 
-const tables: Table[] = [
-  { id: 1, tableNumber: 'Table 1' },
-  { id: 2, tableNumber: 'Table 2' },
-  { id: 3, tableNumber: 'Table 3' },
-];
-
-const gamePresenters: GamePresenter[] = [
-  { id: 1, name: 'GP 1' },
-  { id: 2, name: 'GP 2' },
-  { id: 3, name: 'GP 3' },
-];
-
 export function ShiftTable() {
+  const { employees, casinoTables } = useDataContext();
   const startTimeShift = 8 * 60;    // From: 08 a.m.
   const endTimeShift = 15.8 * 60;   // To:   16 p.m.
   const interval = 20;
@@ -58,7 +48,7 @@ export function ShiftTable() {
     return timeSlots;
   }
 
-  function renderScheduleRows(gamePresenters: GamePresenter[], timeSlots: string[], tables: Table[]) {
+  function renderScheduleRows(gamePresenters: GamePresenter[], timeSlots: string[], tables: CasinoTable[]) {
     return gamePresenters.map((gamePresenter, gpIndex) => {
       const { id, name } = gamePresenter;
 
@@ -95,7 +85,7 @@ export function ShiftTable() {
               </tr>
             </thead>
             <tbody>
-              {renderScheduleRows(gamePresenters, timeSlots, tables)}
+              {renderScheduleRows(employees, timeSlots, casinoTables)}
             </tbody>
           </table>
         </TableContainer>
