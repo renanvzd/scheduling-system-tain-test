@@ -21,7 +21,7 @@ export function ShiftTable() {
   const { gamePresenters, addGamePresenter, casinoTables } = useDataContext();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const gamePresentersInsufficient = gamePresenters.length < casinoTables.length
+  const gamePresentersInsufficient = gamePresenters.length <= casinoTables.length
 
   const startTimeShift = 8 * 60;    // From: 08 a.m.
   const endTimeShift = 15.8 * 60;   // To:   16 p.m.
@@ -58,28 +58,46 @@ export function ShiftTable() {
   }
 
   function renderScheduleRows(gamePresenters: IGamePresenters[], timeSlots: string[], tables: CasinoTable[]) {
-    return gamePresenters.map((gamePresenter, gpIndex) => {
-      const { id, name } = gamePresenter;
+    const difference = gamePresenters.length - tables.length;
+    const updatedTables = [...tables];
 
+    if (gamePresenters.length > tables.length) {
+      for (let i = 0; i < difference; i++) {
+        updatedTables.push({ id: updatedTables.length + 1, tableNumber: "Break" });
+      }
+      return gamePresenters.map((gamePresenter, gpIndex) => {
+        const { id, name } = gamePresenter;
+        const tableCells = timeSlots.map((timeSlot, timeSlotIndex) => {
+          const tableIndex = (timeSlotIndex + gpIndex) % updatedTables.length;
+          const { tableNumber } = updatedTables[tableIndex];
+          const isBreak = tableNumber === "Break";
 
-      const tableCells = timeSlots.map((timeSlot, timeSlotIndex) => {
-        const tableIndex = (timeSlotIndex + gpIndex) % tables.length;
-        const { tableNumber } = tables[tableIndex];
+          const cellStyle = {
+            fontWeight: isBreak ? 'bold' : 'normal',
+            backgroundColor: isBreak ? '#aeaeae' : 'transparent',
+          };
+
+          return (
+            <td key={timeSlot} style={cellStyle}>
+              {tableNumber}
+            </td>
+          );
+        });
 
         return (
-          <td key={timeSlot}>
-            {tableNumber}
-          </td>
+          <tr key={id}>
+            <td style={{ fontWeight: 'bold' }}>
+              {name}
+            </td>
+            {tableCells}
+          </tr>
         );
       });
+    }
 
-      return (
-        <tr key={id}>
-          <td>{name}</td>
-          {tableCells}
-        </tr>
-      );
-    });
+    if (gamePresenters.length <= tables.length) {
+      return null;
+    }
   }
 
   const toggleModal = () => {

@@ -14,9 +14,15 @@
     },
     {
       "name": "GP 3",
-      "age": "40",
-      "admissionDate": "2023-02-09",
+      "age": "35",
+      "admissionDate": "2023-09-03",
       "id": 3
+    },
+    {
+      "name": "GP 4",
+      "age": "35",
+      "admissionDate": "2023-09-03",
+      "id": 4
     }
   ],
   "casino-tables": [
