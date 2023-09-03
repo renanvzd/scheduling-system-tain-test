@@ -12,25 +12,40 @@ export const Container = styled.div`
 
     nav {
       div {
+        display: flex;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+
         button {
           background: #39a805;
+          width: 290px;
           color: #fff;
           font-weight: 600;
           border-radius: 8px;
           border: 0;
 
-          display: flex;
           flex-direction: row;
+          display: flex;
+          margin: auto;
+          justify-content: center;
           align-items: center;
 
           .text {
-            padding: 16px 24px;
+            padding: 16px 0px;
             font-size: 1rem;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
 
           .icon {
             display: flex;
-            padding: 16px 16px;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            padding: 16px 0px;
             border-right: 1px solid #fff;
             margin: 0 auto;
           }
