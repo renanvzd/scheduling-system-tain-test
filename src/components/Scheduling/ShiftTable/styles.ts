@@ -36,14 +36,15 @@ export const TableContainer = styled.div`
 
   th {
     background-color: #d5d5d5;
-    border: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
     text-align: center;
     padding: 15px;
     width: 100%;
     white-space: nowrap;
     position: sticky;
     top: 0;
-    z-index: 2; /* Adicione um índice z para garantir que o cabeçalho fique na parte superior */
   }
 
   td {
