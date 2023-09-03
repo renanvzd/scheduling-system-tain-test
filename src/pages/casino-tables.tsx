@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import api from "@/services/api";
+import { useState } from "react";
+import { useDataContext } from '@/context/data-context';
 
 import { Layout } from "@/components/Layout"
 
@@ -17,19 +17,10 @@ interface ICasinoTable {
 }
 
 export default function Tables() {
-  const [tables, setTables] = useState<ICasinoTable[]>([]);
+  const { casinoTables, addCasinoTable, updateCasinoTable, deleteCasinoTable } = useDataContext();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingTable, setEditingTable] = useState<ICasinoTable>({} as ICasinoTable);
   const [editModalOpen, setEditModalOpen] = useState(false);
-
-  useEffect(() => {
-    async function getTables() {
-      const response = await api.get('/casino-tables');
-
-      setTables(response.data);
-    }
-    getTables()
-  }, [])
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
@@ -44,42 +35,23 @@ export default function Tables() {
     setEditingTable(table);
   }
 
-  async function handleAddTable(employee: Omit<ICasinoTable, 'id'>,): Promise<void> {
-    try {
-      const response = await api.post('/casino-tables', {
-        ...employee,
-      });
+  const handleAddTable = async (table: Omit<ICasinoTable, 'id'>) => {
+    await addCasinoTable(table);
+  }
 
-      setTables([...tables, response.data]);
-    } catch (err) {
-      console.log(err);
+  const handleUpdateTable = async (table: Omit<ICasinoTable, 'id'>) => {
+    if ('id' in editingTable) {
+      await updateCasinoTable({ ...editingTable, ...table } as ICasinoTable);
     }
   }
 
-  const handleUpdateTable = async (table: Omit<ICasinoTable, 'id'>): Promise<void> => {
+  const handleDeleteTable = async (id: number): Promise<void> => {
     try {
-      const tableUpdated = await api.put(
-        `/casino-tables/${editingTable.id}`,
-        { ...editingTable, ...table },
-      );
-
-      const tablesUpdated = tables.map(employee =>
-        employee.id !== tableUpdated.data.id ? employee : tableUpdated.data,
-      );
-
-      setTables(tablesUpdated);
+      await deleteCasinoTable(id);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
-  }
-
-  const handleDeleteTable = async (id: number) => {
-    await api.delete(`/casino-tables/${id}`);
-
-    const employeesFiltered = tables.filter(table => table.id !== id);
-
-    setTables(employeesFiltered);
-  }
+  };
 
   return (
     <Layout>
@@ -99,7 +71,7 @@ export default function Tables() {
         handleUpdateTable={handleUpdateTable}
       />
       <CasinoTablesList
-        tables={tables}
+        tables={casinoTables}
         handleEditTable={handleEditTable}
         handleDelete={handleDeleteTable}
       />
