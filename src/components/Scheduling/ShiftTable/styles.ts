@@ -54,3 +54,42 @@ export const TableContainer = styled.div`
     white-space: nowrap;
   }
 `;
+
+export const TableContainerEmpty = styled.div`
+  width: 1380px;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  margin: auto;
+  
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  
+  .text {
+    font-size: 1.5rem;
+  }
+
+  .data {
+    background: #d5d5d5;
+    margin-top: 20px;
+    padding: 25px;
+  }
+
+  .data-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+  
+  .data-text {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+`

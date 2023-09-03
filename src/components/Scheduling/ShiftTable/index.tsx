@@ -1,19 +1,28 @@
 import { useDataContext } from '@/context/data-context';
+import { useState } from "react";
 
-import { Container, TableContainer } from "./styles";
+import { Container, TableContainer, TableContainerEmpty } from "./styles";
+import { ButtonAddGamePresenter } from '@/components/GamePresenters/ButtonAddGamePresenter';
+import { ModalAddGamePresenter } from "@/components/GamePresenters/ModalAddGamePresenter";
 
 interface CasinoTable {
   id: number;
   tableNumber: string;
 }
 
-interface GamePresenter {
+interface IGamePresenters {
   id: number;
   name: string;
+  age: string;
+  admissionDate: string;
 }
 
 export function ShiftTable() {
-  const { gamePresenters, casinoTables } = useDataContext();
+  const { gamePresenters, addGamePresenter, casinoTables } = useDataContext();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const gamePresentersInsufficient = gamePresenters.length < casinoTables.length
+
   const startTimeShift = 8 * 60;    // From: 08 a.m.
   const endTimeShift = 15.8 * 60;   // To:   16 p.m.
   const interval = 20;
@@ -48,7 +57,7 @@ export function ShiftTable() {
     return timeSlots;
   }
 
-  function renderScheduleRows(gamePresenters: GamePresenter[], timeSlots: string[], tables: CasinoTable[]) {
+  function renderScheduleRows(gamePresenters: IGamePresenters[], timeSlots: string[], tables: CasinoTable[]) {
     return gamePresenters.map((gamePresenter, gpIndex) => {
       const { id, name } = gamePresenter;
 
@@ -73,9 +82,17 @@ export function ShiftTable() {
     });
   }
 
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  }
+
+  const handleAddGamePresenter = async (gamePresenters: Omit<IGamePresenters, 'id'>) => {
+    await addGamePresenter(gamePresenters);
+  }
+
   return (
     <Container>
-      <div>
+      {!gamePresentersInsufficient ?
         <TableContainer>
           <table>
             <thead>
@@ -89,7 +106,30 @@ export function ShiftTable() {
             </tbody>
           </table>
         </TableContainer>
-      </div>
+        :
+        <TableContainerEmpty>
+          <div>
+            <div>
+              <p className="title">Notice Message </p>
+              <p className='text'>Number of Game Presenters less than the number of registered tables.</p>
+              <p className='text'>The ideal number of game presenters per rotation is the number of tables + 1.</p>
+            </div>
+            <div className='data'>
+              <p className='data-title'>Current Game Presenters and Casino Tables</p>
+              <p className='data-text'>Game Presenters: {gamePresenters.length}</p>
+              <p className='data-text'>Casino Tables: {casinoTables.length}</p>
+            </div>
+            <div>
+              <ButtonAddGamePresenter openModal={toggleModal} />
+              <ModalAddGamePresenter
+                isOpen={modalOpen}
+                setIsOpen={toggleModal}
+                handleAddGamePresenter={handleAddGamePresenter}
+              />
+            </div>
+          </div>
+        </TableContainerEmpty>
+      }
     </Container>
   );
 }
