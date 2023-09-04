@@ -30,10 +30,15 @@ export function ShiftTable() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [selectedShift, setSelectedShift] = useState('');
+  const [shiftIdentification, setShiftIdentification] = useState('');
   const [shiftStartTime, setShiftStartTime] = useState(0);
   const [shiftEndTime, setShiftEndTime] = useState(0);
 
-  const [gamePresentersByShift, gerGamePresentersByShift] = useState<IGamePresenters[]>([]);
+  const [gamePresentersByShift, setGamePresentersByShift] = useState<IGamePresenters[]>([]);
+
+  const gamePresentersFirstShift = gamePresenters.filter((gamePresenter) => gamePresenter.shift === "1");
+  const gamePresentersSecondShift = gamePresenters.filter((gamePresenter) => gamePresenter.shift === "2");
+  const gamePresentersThirdShift = gamePresenters.filter((gamePresenter) => gamePresenter.shift === "3");
 
   const gamePresentersInsufficient = gamePresentersByShift.length <= casinoTables.length;
 
@@ -57,26 +62,30 @@ export function ShiftTable() {
       case '1':
         setShiftStartTime(firstShiftStartAt);
         setShiftEndTime(firstShiftEndAt);
+        setGamePresentersByShift(gamePresentersFirstShift);
+        setShiftIdentification('1st Shift')
         break;
       case '2':
         setShiftStartTime(secondShiftStartAt);
         setShiftEndTime(secondShiftEndAt);
+        setGamePresentersByShift(gamePresentersSecondShift);
+        setShiftIdentification('2nd Shift')
         break;
       case '3':
         setShiftStartTime(thirdShiftStartAt);
         setShiftEndTime(thirdShiftEndAt);
+        setGamePresentersByShift(gamePresentersThirdShift);
+        setShiftIdentification('3rd Shift')
         break;
       default:
         null
         break;
     }
-    const filteredGamePresentersArray = gamePresenters.filter((gamePresenter) => gamePresenter.shift === shift);
-    gerGamePresentersByShift(filteredGamePresentersArray);
   };
 
   useEffect(() => {
     handleShiftSelection(selectedShift);
-  }, [selectedShift]);
+  }, [selectedShift, gamePresenters]);
 
 
   function renderTimeSlots(timeSlots: string[]) {
@@ -179,8 +188,31 @@ export function ShiftTable() {
         />
       </ButtonsContainer>
 
-      <Container>
-        {!gamePresentersInsufficient ? (
+      {!shiftIdentification ? (
+        <Container>
+          <TableContainerEmpty>
+            <div>
+              <div>
+                <p className="title">Please, select the shift you want to check.</p>
+                <p className="text">First Shift - From: 00:00 To: 08:00</p>
+                <p className="text">Second Shift - From: 08:00 To: 16:00</p>
+                <p className="text">Third Shift - From: 16:00 To: 24:00</p>
+              </div>
+              <div className="data">
+                <p className="data-title">Current Game Presenters and Casino Tables</p>
+                <p className="data-text">Game Presenters on 1st Shift: <b>{gamePresentersFirstShift.length}</b></p>
+                <p className="data-text">Game Presenters on 2nd Shift: <b>{gamePresentersSecondShift.length}</b></p>
+                <p className="data-text">Game Presenters on 3rd Shift: <b>{gamePresentersThirdShift.length}</b></p>
+                <p className="data-text">Casino Tables: <b>{casinoTables.length}</b></p>
+              </div>
+            </div>
+          </TableContainerEmpty>
+        </Container>
+      )
+        : null
+      }
+      {!!shiftIdentification && !gamePresentersInsufficient ? (
+        <Container>
           <TableContainer>
             <table>
               <thead>
@@ -192,18 +224,22 @@ export function ShiftTable() {
               <tbody>{renderScheduleRows(gamePresentersByShift, timeSlots, casinoTables)}</tbody>
             </table>
           </TableContainer>
-        ) : (
+        </Container>
+      ) : null}
+
+      {!!shiftIdentification && gamePresentersInsufficient ? (
+        <Container>
           <TableContainerEmpty>
             <div>
               <div>
-                <p className="title">Notice Message</p>
+                <p className="title">Notice Message: {shiftIdentification}</p>
                 <p className="text">Number of Game Presenters less than the number of registered tables.</p>
                 <p className="text">The ideal number of game presenters per rotation is the number of tables + 1.</p>
               </div>
               <div className="data">
                 <p className="data-title">Current Game Presenters and Casino Tables</p>
-                <p className="data-text">Game Presenters: {gamePresenters.length}</p>
-                <p className="data-text">Casino Tables: {casinoTables.length}</p>
+                <p className="data-text">Game Presenters on {shiftIdentification}: <b>{gamePresentersByShift.length}</b></p>
+                <p className="data-text">Casino Tables: <b>{casinoTables.length}</b></p>
               </div>
               <div>
                 <ButtonAddGamePresenter openModal={toggleModal} />
@@ -215,8 +251,8 @@ export function ShiftTable() {
               </div>
             </div>
           </TableContainerEmpty>
-        )}
-      </Container>
+        </Container >
+      ) : null}
     </>
   );
 }

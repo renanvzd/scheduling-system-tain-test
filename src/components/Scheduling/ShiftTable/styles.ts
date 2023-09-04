@@ -37,7 +37,6 @@ export const TableContainer = styled.div`
   }
 
   tr {
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     &:nth-child(even) {
       background-color: #f2f2f2;
     }
@@ -49,8 +48,7 @@ export const TableContainer = styled.div`
     border-right: 1px solid #f2f2f2;
     border-left: 1px solid #f2f2f2;
     text-align: center;
-    padding: 15px;
-    width: 100%;
+    padding: 15px 15px;
     white-space: nowrap;
     position: sticky;
     top: 0;
@@ -81,6 +79,7 @@ export const TableContainerEmpty = styled.div`
   
   .text {
     font-size: 1.5rem;
+    line-height: 35px;
   }
 
   .data {
@@ -99,6 +98,7 @@ export const TableContainerEmpty = styled.div`
   .data-text {
     text-align: center;
     font-size: 1.5rem;
+    padding-top: 10px;
   }
 
 `
