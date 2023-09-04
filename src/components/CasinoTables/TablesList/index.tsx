@@ -6,7 +6,7 @@ interface ICasinoTable {
   id: number;
   tableNumber: string;
   game: string;
-  creationDate: string;
+  createdAt: string;
 }
 
 interface CasinoTableProps {
@@ -27,7 +27,7 @@ export function CasinoTablesList({ tables, handleEditTable, handleDelete }: Casi
                 <th>ID</th>
                 <th>Table Number</th>
                 <th>Game</th>
-                <th>Creation Date</th>
+                <th>Created At</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -38,7 +38,7 @@ export function CasinoTablesList({ tables, handleEditTable, handleDelete }: Casi
                   <td>{table.id}</td>
                   <td>{table.tableNumber}</td>
                   <td>{table.game}</td>
-                  <td>{table.creationDate}</td>
+                  <td>{table.createdAt}</td>
                   <td>
                     <button
                       type="button"

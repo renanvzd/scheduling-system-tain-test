@@ -9,7 +9,7 @@ interface IGamePresenter {
   id: number;
   name: string;
   age: string;
-  admissionDate: string;
+  createdAt: string;
   shift: string;
 }
 
@@ -17,7 +17,7 @@ interface ICasinoTable {
   id: number;
   tableNumber: string;
   game: string;
-  creationDate: string;
+  createdAt: string;
 }
 
 interface DataContextType {
@@ -58,8 +58,13 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({ childr
 
   const addGamePresenter = async (gamePresenter: Omit<IGamePresenter, 'id'>) => {
     try {
+      const currentDate = new Date();
+
+      const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
       const response = await api.post('/game-presenters', {
         ...gamePresenter,
+        createdAt: formattedDate,
       });
 
       setGamePresenters([...gamePresenters, response.data]);
@@ -70,8 +75,12 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({ childr
 
   const addCasinoTable = async (casinoTable: Omit<ICasinoTable, 'id'>) => {
     try {
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
       const response = await api.post('/casino-tables', {
         ...casinoTable,
+        createdAt: formattedDate,
       });
 
       setCasinoTables([...casinoTables, response.data]);

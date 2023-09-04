@@ -41,7 +41,6 @@ export function ModalEditTable({ isOpen, setIsOpen, handleUpdateTable, editingTa
         <p className='modal-title'>Edit Casino Table</p>
         <Input name="tableNumber" placeholder="Table Number" input={true} />
         <Input name="game" placeholder="Game" input={true} />
-        <Input name="creationDate" placeholder="Creation date" input={true} />
 
         <button type="submit">
           <div className="icon">

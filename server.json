@@ -5,83 +5,83 @@
       "name": "GP 1",
       "age": "30",
       "shift": "1",
-      "admissionDate": "2023-31-08"
+      "createdAt": "2023-31-08"
     },
     {
       "name": "GP 2",
       "age": "35",
       "shift": "1",
-      "admissionDate": "2023-01-09",
+      "createdAt": "2023-01-09",
       "id": 2
     },
     {
       "name": "GP 3",
       "age": "40",
       "shift": "1",
-      "admissionDate": "2023-09-03",
+      "createdAt": "2023-09-03",
       "id": 3
     },
     {
       "name": "GP 4",
       "age": "45",
       "shift": "1",
-      "admissionDate": "2023-09-04",
+      "createdAt": "2023-09-04",
       "id": 4
     },
     {
       "name": "GP 5",
       "age": "30",
       "shift": "2",
-      "admissionDate": "2023-31-08",
+      "createdAt": "2023-31-08",
       "id": 5
     },
     {
       "name": "GP 6",
       "age": "35",
       "shift": "2",
-      "admissionDate": "2023-01-09",
+      "createdAt": "2023-01-09",
       "id": 6
     },
     {
       "name": "GP 7",
       "age": "40",
       "shift": "2",
-      "admissionDate": "2023-09-03",
+      "createdAt": "2023-09-03",
       "id": 7
     },
     {
       "name": "GP 8",
       "age": "45",
       "shift": "2",
-      "admissionDate": "2023-09-04",
+      "createdAt": "2023-09-04",
       "id": 8
     },
     {
       "name": "GP 9",
       "age": "30",
       "shift": "3",
-      "admissionDate": "2023-31-08",
+      "createdAt": "2023-31-08",
       "id": 9
     },
     {
       "name": "GP 10",
       "age": "35",
       "shift": "3",
-      "admissionDate": "2023-01-09",
+      "createdAt": "2023-01-09",
       "id": 10
     },
     {
       "name": "GP 11",
       "age": "40",
       "shift": "3",
-      "admissionDate": "2023-09-03",
+      "createdAt": "2023-09-03",
       "id": 11
     },
     {
       "name": "GP 12",
       "age": "45",
       "shift": "3",
-      "admissionDate": "2023-09-04",
+      "createdAt": "2023-09-04",
       "id": 12
     }
   ],
@@ -90,19 +90,19 @@
       "id": 1,
       "tableNumber": "Table 1",
       "game": "Blackjack",
-      "creationDate": "2023-02-09"
+      "createdAt": "2023-09-04"
     },
     {
       "id": 2,
       "tableNumber": "Table 2",
       "game": "Blackjack",
-      "creationDate": "2023-02-09"
+      "createdAt": "2023-09-04"
     },
     {
       "id": 3,
       "tableNumber": "Table 3",
       "game": "Blackjack",
-      "creationDate": "2023-02-09"
+      "createdAt": "2023-09-04"
     }
   ]
 }

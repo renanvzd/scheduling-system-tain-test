@@ -21,7 +21,7 @@ interface IGamePresenters {
   id: number;
   name: string;
   age: string;
-  admissionDate: string;
+  createdAt: string;
   shift: string;
 }
 

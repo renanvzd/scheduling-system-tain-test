@@ -34,7 +34,6 @@ export function ModalAddTable({ isOpen, setIsOpen, handleAddTable }: ModalAddTab
         <p className='modal-title'>New Casino Table</p>
         <Input name="tableNumber" placeholder="Table Number" input={true} />
         <Input name="game" placeholder="Game" input={true} />
-        <Input name="creationDate" placeholder="Creation Date" input={true} />
 
         <button type="submit">
           <div className="icon">

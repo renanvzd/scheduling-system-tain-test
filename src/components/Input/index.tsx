@@ -45,6 +45,7 @@ export function Input({ name, input, select, children, ...rest }: InputProps) {
             defaultValue={defaultValue}
             ref={inputRef}
             {...rest}
+            maxLength={15}
           />
         </ContainerInput>
       )}

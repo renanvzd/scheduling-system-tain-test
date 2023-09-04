@@ -9,14 +9,14 @@ import { Form } from './styles';
 interface AddGamePresenters {
   name: string;
   age: string;
-  admissionDate: string;
+  createdAt: string;
 }
 
 interface IGamePresenters {
   id: number;
   name: string;
   age: string;
-  admissionDate: string;
+  createdAt: string;
 }
 
 interface ModalEditGamePresenterProps {
@@ -40,7 +40,6 @@ export function ModalEditGamePresenter({ isOpen, setIsOpen, handleUpdateGamePres
         <p className='modal-title'>Edit Game Presenter</p>
         <Input name="name" placeholder="Game presenter name" input={true} />
         <Input name="age" placeholder="Age" input={true} />
-        <Input name="admissionDate" placeholder="Admission date" input={true} />
         <Input
           name="shift"
           placeholder="Shift"
