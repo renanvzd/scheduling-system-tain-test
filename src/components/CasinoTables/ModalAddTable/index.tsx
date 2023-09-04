@@ -4,6 +4,7 @@ import { FormHandles } from '@unform/core';
 
 import { Modal } from '@/components/Modal';
 import { Input } from '@/components/Input';
+
 import { Form } from './styles';
 
 interface AddTable {
@@ -30,16 +31,16 @@ export function ModalAddTable({ isOpen, setIsOpen, handleAddTable }: ModalAddTab
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <p className='modal-title'>New Game Table</p>
-        <Input name="tableNumber" placeholder="Table Number" />
-        <Input name="game" placeholder="Game" />
-        <Input name="creationDate" placeholder="Creation Date" />
+        <p className='modal-title'>New Casino Table</p>
+        <Input name="tableNumber" placeholder="Table Number" input={true} />
+        <Input name="game" placeholder="Game" input={true} />
+        <Input name="creationDate" placeholder="Creation Date" input={true} />
 
         <button type="submit">
           <div className="icon">
             <FiCheckSquare size={24} />
           </div>
-          <p className="text-button">Add new table</p>
+          <p className="text-button">Add new Casino Table</p>
         </button>
       </Form>
     </Modal>

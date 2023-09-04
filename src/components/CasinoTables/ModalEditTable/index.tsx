@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { FiCheckSquare } from 'react-icons/fi';
 
-import { Form } from './styles';
 import { Modal } from '@/components/Modal';
 import { Input } from '@/components/Input';
 import { FormHandles } from '@unform/core';
 
+import { Form } from './styles';
 
 interface AddTable {
   tableNumber: string;
@@ -39,15 +39,15 @@ export function ModalEditTable({ isOpen, setIsOpen, handleUpdateTable, editingTa
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit} initialData={editingTable}>
         <p className='modal-title'>Edit Casino Table</p>
-        <Input name="tableNumber" placeholder="Table Number" />
-        <Input name="game" placeholder="Game" />
-        <Input name="creationDate" placeholder="Creation date" />
+        <Input name="tableNumber" placeholder="Table Number" input={true} />
+        <Input name="game" placeholder="Game" input={true} />
+        <Input name="creationDate" placeholder="Creation date" input={true} />
 
         <button type="submit">
           <div className="icon">
             <FiCheckSquare size={24} />
           </div>
-          <div className="text-button">Edit Game Presenter</div>
+          <div className="text-button">Edit Casino Table</div>
         </button>
       </Form>
     </Modal>
