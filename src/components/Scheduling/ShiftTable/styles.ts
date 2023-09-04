@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 
+export const ButtonsContainer = styled.main`
+  width: 1380px;
+  padding-left: 0px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  gap: 30px;
+`;
+
 export const Container = styled.main`
   display: flex;
-  flex-direction: column;
+  flex-direction: ;
   margin: auto;
   align-items: center;
 `;
@@ -14,11 +23,11 @@ export const TableContainer = styled.div`
   justify-content: top;
   align-content: top;
   width: 1380px;
-  height: 600px;
+  height: 580px;
   overflow-x: auto;
   overflow-y: auto;
 
-  margin-top: 30px;
+  margin-top: 20px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border: 1px solid #dddddd;
 

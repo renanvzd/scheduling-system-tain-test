@@ -1,9 +1,11 @@
 import { useDataContext } from '@/context/data-context';
 import { useState } from "react";
 
-import { Container, TableContainer, TableContainerEmpty } from "./styles";
+import { ButtonSelectShift } from '@/components/Scheduling/ButtonSelectShift';
 import { ButtonAddGamePresenter } from '@/components/GamePresenters/ButtonAddGamePresenter';
 import { ModalAddGamePresenter } from "@/components/GamePresenters/ModalAddGamePresenter";
+
+import { Container, ButtonsContainer, TableContainer, TableContainerEmpty } from "./styles";
 
 interface CasinoTable {
   id: number;
@@ -109,45 +111,52 @@ export function ShiftTable() {
   }
 
   return (
-    <Container>
-      {!gamePresentersInsufficient ?
-        <TableContainer>
-          <table>
-            <thead>
-              <tr>
-                <th>Game Presenter</th>
-                {renderTimeSlots(timeSlots)}
-              </tr>
-            </thead>
-            <tbody>
-              {renderScheduleRows(gamePresenters, timeSlots, casinoTables)}
-            </tbody>
-          </table>
-        </TableContainer>
-        :
-        <TableContainerEmpty>
-          <div>
+    <>
+      <ButtonsContainer>
+        <ButtonSelectShift firstShift={true} shiftTitle='1st Shift' />
+        <ButtonSelectShift secondShift={true} shiftTitle='2nd Shift' />
+        <ButtonSelectShift thirdShift={true} shiftTitle='3rd Shift' />
+      </ButtonsContainer>
+      <Container>
+        {!gamePresentersInsufficient ?
+          <TableContainer>
+            <table>
+              <thead>
+                <tr>
+                  <th>Game Presenter</th>
+                  {renderTimeSlots(timeSlots)}
+                </tr>
+              </thead>
+              <tbody>
+                {renderScheduleRows(gamePresenters, timeSlots, casinoTables)}
+              </tbody>
+            </table>
+          </TableContainer>
+          :
+          <TableContainerEmpty>
             <div>
-              <p className="title">Notice Message </p>
-              <p className='text'>Number of Game Presenters less than the number of registered tables.</p>
-              <p className='text'>The ideal number of game presenters per rotation is the number of tables + 1.</p>
+              <div>
+                <p className="title">Notice Message </p>
+                <p className='text'>Number of Game Presenters less than the number of registered tables.</p>
+                <p className='text'>The ideal number of game presenters per rotation is the number of tables + 1.</p>
+              </div>
+              <div className='data'>
+                <p className='data-title'>Current Game Presenters and Casino Tables</p>
+                <p className='data-text'>Game Presenters: {gamePresenters.length}</p>
+                <p className='data-text'>Casino Tables: {casinoTables.length}</p>
+              </div>
+              <div>
+                <ButtonAddGamePresenter openModal={toggleModal} />
+                <ModalAddGamePresenter
+                  isOpen={modalOpen}
+                  setIsOpen={toggleModal}
+                  handleAddGamePresenter={handleAddGamePresenter}
+                />
+              </div>
             </div>
-            <div className='data'>
-              <p className='data-title'>Current Game Presenters and Casino Tables</p>
-              <p className='data-text'>Game Presenters: {gamePresenters.length}</p>
-              <p className='data-text'>Casino Tables: {casinoTables.length}</p>
-            </div>
-            <div>
-              <ButtonAddGamePresenter openModal={toggleModal} />
-              <ModalAddGamePresenter
-                isOpen={modalOpen}
-                setIsOpen={toggleModal}
-                handleAddGamePresenter={handleAddGamePresenter}
-              />
-            </div>
-          </div>
-        </TableContainerEmpty>
-      }
-    </Container>
+          </TableContainerEmpty>
+        }
+      </Container>
+    </>
   );
 }
