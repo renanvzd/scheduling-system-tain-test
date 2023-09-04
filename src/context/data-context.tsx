@@ -10,6 +10,7 @@ interface IGamePresenter {
   name: string;
   age: string;
   admissionDate: string;
+  shift: string;
 }
 
 interface ICasinoTable {
