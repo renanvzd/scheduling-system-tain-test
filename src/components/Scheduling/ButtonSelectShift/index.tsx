@@ -2,17 +2,15 @@ import { ButtonShift } from './styles';
 
 interface ButtonSelectShiftProps {
   shiftTitle: string;
-  firstShift?: boolean;
-  secondShift?: boolean;
-  thirdShift?: boolean;
+  onSelect?: boolean;
   onClick: () => void;
 }
 
-export function ButtonSelectShift({ shiftTitle, firstShift, secondShift, thirdShift, onClick }: ButtonSelectShiftProps) {
+export function ButtonSelectShift({ shiftTitle, onSelect, onClick }: ButtonSelectShiftProps) {
   return (
-    <ButtonShift firstShift={firstShift} secondShift={secondShift} thirdShift={thirdShift}>
+    <ButtonShift onSelect={onSelect} >
       <button type="button" onClick={onClick}>
-        <div className="text">{shiftTitle}</div>
+        <div className="text-button">{shiftTitle}</div>
       </button>
     </ButtonShift>
   );

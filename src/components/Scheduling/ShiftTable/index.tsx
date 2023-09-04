@@ -171,21 +171,29 @@ export function ShiftTable() {
   return (
     <>
       <ButtonsContainer>
-        <ButtonSelectShift
-          firstShift={true}
-          shiftTitle="1st Shift"
-          onClick={() => handleShiftSelection('1')}
-        />
-        <ButtonSelectShift
-          secondShift={true}
-          shiftTitle="2nd Shift"
-          onClick={() => handleShiftSelection('2')}
-        />
-        <ButtonSelectShift
-          thirdShift={true}
-          shiftTitle="3rd Shift"
-          onClick={() => handleShiftSelection('3')}
-        />
+        {!selectedShift ?
+          <div className='title-section'>
+            <p className="title">Please, select the shift you want to check:</p>
+          </div>
+          : null
+        }
+        <div className='button-section'>
+          <ButtonSelectShift
+            onSelect={selectedShift === '1'}
+            shiftTitle="1st Shift"
+            onClick={() => handleShiftSelection('1')}
+          />
+          <ButtonSelectShift
+            onSelect={selectedShift === '2'}
+            shiftTitle="2nd Shift"
+            onClick={() => handleShiftSelection('2')}
+          />
+          <ButtonSelectShift
+            onSelect={selectedShift === '3'}
+            shiftTitle="3rd Shift"
+            onClick={() => handleShiftSelection('3')}
+          />
+        </div>
       </ButtonsContainer>
 
       {!shiftIdentification ? (
@@ -193,7 +201,6 @@ export function ShiftTable() {
           <TableContainerEmpty>
             <div>
               <div>
-                <p className="title">Please, select the shift you want to check.</p>
                 <p className="text">First Shift - From: 00:00 To: 08:00</p>
                 <p className="text">Second Shift - From: 08:00 To: 16:00</p>
                 <p className="text">Third Shift - From: 16:00 To: 24:00</p>

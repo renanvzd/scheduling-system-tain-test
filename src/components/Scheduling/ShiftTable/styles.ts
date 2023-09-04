@@ -2,11 +2,29 @@ import styled from 'styled-components';
 
 export const ButtonsContainer = styled.main`
   width: 1380px;
-  padding-left: 0px;
   display: flex;
+  flex-direction: column;
   margin: auto;
+  
+  justify-content: center;
   align-items: center;
-  gap: 30px;
+
+  .title-section {
+    display: flex;
+    flex-direction: column;
+    
+    .title {
+      padding-top: 20px;
+      font-size: 2rem;
+      font-weight: bolder;
+      text-align: center;
+    }
+  }
+
+  .button-section {
+    display: flex;
+    gap: 30px;
+  }
 `;
 
 export const Container = styled.main`
@@ -71,11 +89,11 @@ export const TableContainerEmpty = styled.div`
   
   
   .title {
-    font-size: 2rem;
-    font-weight: bolder;
-    text-align: center;
-    padding-bottom: 30px;
-  }
+      padding-bottom: 15px;
+      font-size: 2rem;
+      font-weight: bolder;
+      text-align: center;
+    }
   
   .text {
     font-size: 1.5rem;
@@ -100,5 +118,4 @@ export const TableContainerEmpty = styled.div`
     font-size: 1.5rem;
     padding-top: 10px;
   }
-
 `
