@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const ContainerInput = styled.div`
+  background: #fff;
   display: flex;
   align-items: center;
-
-  background: #fff;
   border-radius: 8px;
+
   padding: 18px 24px;
   width: 100%;
   font-size: 16px;
@@ -26,8 +26,22 @@ export const Container = styled.div`
       color: #b7b7cc;
     }
   }
+`;
 
-  svg {
-    margin-right: 16px;
+export const ContainerSelect = styled.div`
+  background: #fff;
+  display: flex;
+  border-radius: 8px;
+  font-size: 16px;
+
+  select {
+    padding: 18px 20px;
+    color: #000;
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
   }
 `;

@@ -1,36 +1,60 @@
-import {
-  useEffect,
-  useRef,
-} from 'react';
+import { useEffect, useRef, ReactNode } from 'react';
 import { useField } from '@unform/core';
 
-import { Container } from './styles';
+import { ContainerInput, ContainerSelect } from './styles';
 
 interface InputProps {
   name: string;
   placeholder?: string;
+  input?: boolean;
+  select?: boolean;
+  children?: ReactNode;
 }
 
-export function Input({ name, ...rest }: InputProps) {
+export function Input({ name, input, select, children, ...rest }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   const { fieldName, defaultValue, registerField } = useField(name);
 
   useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
-    });
+    if (fieldName && inputRef.current) {
+      registerField({
+        name: fieldName,
+        ref: inputRef.current,
+        path: 'value',
+      });
+    }
   }, [fieldName, registerField]);
 
+  useEffect(() => {
+    if (select && selectRef.current) {
+      registerField({
+        name,
+        ref: selectRef.current,
+        path: 'value',
+      });
+    }
+  }, [select, name, registerField]);
+
   return (
-    <Container>
-      <input
-        defaultValue={defaultValue}
-        ref={inputRef}
-        {...rest}
-      />
-    </Container>
+    <>
+      {input && (
+        <ContainerInput>
+          <input
+            defaultValue={defaultValue}
+            ref={inputRef}
+            {...rest}
+          />
+        </ContainerInput>
+      )}
+      {select && (
+        <ContainerSelect>
+          <select defaultValue={defaultValue} ref={selectRef} {...rest}>
+            {children}
+          </select>
+        </ContainerSelect>
+      )}
+    </>
   );
-};
+}

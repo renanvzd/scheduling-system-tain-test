@@ -7,6 +7,7 @@ interface IGamePresenters {
   name: string;
   age: string;
   admissionDate: string;
+  shift: string;
 }
 
 interface GamePresenterProps {
@@ -27,6 +28,7 @@ export function GamePresentersList({ gamePresenters, handleEditGamePresenter, ha
                 <th>ID</th>
                 <th>Name</th>
                 <th>Age</th>
+                <th>Shift</th>
                 <th>Admission Date</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -38,6 +40,7 @@ export function GamePresentersList({ gamePresenters, handleEditGamePresenter, ha
                   <td>{gamePresenter.id}</td>
                   <td>{gamePresenter.name}</td>
                   <td>{gamePresenter.age}</td>
+                  <td>{gamePresenter.shift}</td>
                   <td>{gamePresenter.admissionDate}</td>
                   <td>
                     <button

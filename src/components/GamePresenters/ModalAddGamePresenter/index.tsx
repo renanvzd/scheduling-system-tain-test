@@ -10,16 +10,20 @@ interface AddGamePresenter {
   name: string;
   age: string;
   admissionDate: string;
+  shift: string;
 }
 
-interface ModalAddGamePresenter {
+interface ModalAddGamePresenterProps {
   isOpen: boolean;
   setIsOpen: () => void;
   handleAddGamePresenter: (data: AddGamePresenter) => void;
 }
 
-export function ModalAddGamePresenter({ isOpen, setIsOpen, handleAddGamePresenter }: ModalAddGamePresenter) {
-
+export function ModalAddGamePresenter({
+  isOpen,
+  setIsOpen,
+  handleAddGamePresenter,
+}: ModalAddGamePresenterProps) {
   const handleSubmit = async (data: AddGamePresenter) => {
     handleAddGamePresenter(data);
     setIsOpen();
@@ -30,11 +34,19 @@ export function ModalAddGamePresenter({ isOpen, setIsOpen, handleAddGamePresente
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <p className='modal-title'>New Game Presenter</p>
-        <Input name="name" placeholder="Game presenter name" />
-        <Input name="age" placeholder="Age" />
-
-        <Input name="admissionDate" placeholder="Admission date" />
+        <p className="modal-title">New Game Presenter</p>
+        <Input name="name" placeholder="Game presenter name" input={true} />
+        <Input name="age" placeholder="Age" input={true} />
+        <Input name="admissionDate" placeholder="Admission date" input={true} />
+        <Input
+          name="shift"
+          placeholder="Shift"
+          select={true}
+        >
+          <option value="1">First Shift - from 00:00 to 08:00</option>
+          <option value="2">Second Shift - from 08:00 to 16:00</option>
+          <option value="3">Third Shift - from 16:00 to 00:00</option>
+        </Input>
         <button type="submit">
           <div className="icon">
             <FiCheckSquare size={24} />
@@ -45,4 +57,3 @@ export function ModalAddGamePresenter({ isOpen, setIsOpen, handleAddGamePresente
     </Modal>
   );
 }
-
