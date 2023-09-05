@@ -1,6 +1,9 @@
 import { useDataContext } from '@/context/data-context';
 import { useState, useEffect } from 'react';
 
+import { useTimeSlots } from '@/hooks/useTimeSlots';
+import { useRenderScheduleRows } from '@/hooks/useRenderScheduleRows';
+
 import { ButtonSelectShift } from '@/components/Scheduling/ButtonSelectShift';
 import { ButtonAddGamePresenter } from '@/components/GamePresenters/ButtonAddGamePresenter';
 import { ModalAddGamePresenter } from '@/components/GamePresenters/ModalAddGamePresenter';
@@ -11,11 +14,6 @@ import {
   TableContainer,
   TableContainerEmpty,
 } from './styles';
-
-interface CasinoTable {
-  id: number;
-  tableNumber: string;
-}
 
 interface IGamePresenters {
   id: number;
@@ -35,7 +33,6 @@ export function ShiftTable() {
   const [shiftEndTime, setShiftEndTime] = useState(0);
 
   const [gamePresentersByShift, setGamePresentersByShift] = useState<IGamePresenters[]>([]);
-
   const gamePresentersFirstShift = gamePresenters.filter((gamePresenter) => gamePresenter.shift === "1");
   const gamePresentersSecondShift = gamePresenters.filter((gamePresenter) => gamePresenter.shift === "2");
   const gamePresentersThirdShift = gamePresenters.filter((gamePresenter) => gamePresenter.shift === "3");
@@ -53,7 +50,8 @@ export function ShiftTable() {
 
   const intervalInMinutes = 20
 
-  const timeSlots: string[] = generateTimeSlots(shiftStartTime, shiftEndTime, intervalInMinutes);
+  const timeSlots = useTimeSlots(shiftStartTime, shiftEndTime, intervalInMinutes);
+  const renderScheduleRows = useRenderScheduleRows(gamePresentersByShift, timeSlots, casinoTables);
 
 
   const handleShiftSelection = (shift: string) => {
@@ -90,73 +88,6 @@ export function ShiftTable() {
 
   function renderTimeSlots(timeSlots: string[]) {
     return timeSlots.map((timeSlot) => <th key={timeSlot}>{timeSlot}</th>);
-  }
-
-  function generateTimeSlots(startTime: number, endTime: number, intervalInMinutesMinutes: number): string[] {
-    const timeSlots: string[] = [];
-
-    for (let currentTime = startTime; currentTime <= endTime; currentTime += intervalInMinutesMinutes) {
-      const startHour = Math.floor(currentTime / 60);
-      const startMinute = currentTime % 60;
-
-      const endTime = currentTime + intervalInMinutesMinutes;
-      const endHour = Math.floor(endTime / 60);
-      const endMinute = endTime % 60;
-
-      const formattedStartTime = `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`;
-      const formattedEndTime = `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
-
-      const timeSlotLabel = `${formattedStartTime} - ${formattedEndTime}`;
-
-      timeSlots.push(timeSlotLabel);
-    }
-
-    return timeSlots;
-  }
-
-  function renderScheduleRows(
-    gamePresentersByShift: IGamePresenters[],
-    timeSlots: string[],
-    tables: CasinoTable[]
-  ) {
-    const difference = gamePresentersByShift.length - tables.length;
-    const updatedTables = [...tables];
-
-    if (gamePresentersByShift.length > tables.length) {
-      for (let i = 0; i < difference; i++) {
-        updatedTables.push({ id: updatedTables.length + 1, tableNumber: 'Break' });
-      }
-      return gamePresentersByShift.map((gamePresenter, gpIndex) => {
-        const { id, name } = gamePresenter;
-        const tableCells = timeSlots.map((timeSlot, timeSlotIndex) => {
-          const tableIndex = (timeSlotIndex + gpIndex) % updatedTables.length;
-          const { tableNumber } = updatedTables[tableIndex];
-          const isBreak = tableNumber === 'Break';
-
-          const cellStyle = {
-            fontWeight: isBreak ? 'bold' : 'normal',
-            backgroundColor: isBreak ? '#aeaeae' : 'transparent',
-          };
-
-          return (
-            <td key={timeSlot} style={cellStyle}>
-              {tableNumber}
-            </td>
-          );
-        });
-
-        return (
-          <tr key={id}>
-            <td style={{ fontWeight: 'bold' }}>{name}</td>
-            {tableCells}
-          </tr>
-        );
-      });
-    }
-
-    if (gamePresentersByShift.length <= tables.length) {
-      return null;
-    }
   }
 
   const toggleModal = () => {
@@ -228,7 +159,7 @@ export function ShiftTable() {
                   {renderTimeSlots(timeSlots)}
                 </tr>
               </thead>
-              <tbody>{renderScheduleRows(gamePresentersByShift, timeSlots, casinoTables)}</tbody>
+              <tbody>{renderScheduleRows}</tbody>
             </table>
           </TableContainer>
         </Container>
