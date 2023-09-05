@@ -1,34 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+# Tain - Frontend Interview Test: Scheduling System
+
+## How to Build and Run the Application
+
+### Node Version Manager - NVM
+
+To ensure that the development environment uses the correct version of Node.js, I recommend using Node Version Manager (NVM). For this application, NVM version 18.12.0 was used.
+
+```bash
+nvm use v18.12.0
+```
+
+### Install Node Modules Package
+
+```bash
+npm install
+```
+
+### Starting the Server
+
+After the Node package installation is completed, run the following command to set up the server:
+
+```bash
+npm run server
+```
+
+### Starting the Development Server
+
+Next, start the development server with the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After running these commands, you can view the result in your browser by accessing:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Introduction
 
-## Learn More
+In this task, you will be required to implement a scheduling system for game presenters' rotation on casino tables. An API will allow you to perform CRUD operations on two main resources:
 
-To learn more about Next.js, take a look at the following resources:
+- Game Presenters
+- Tables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The Game Presenters resource represents the list of all game presenters employed by the company. Game Presenters will be split equally to fill in all three shifts within a 24-hour period (morning, afternoon, night), with each shift lasting 8 hours.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+During their shift, game presenters are required to rotate between a number of casino tables and break slots, ensuring that every casino table has a game presenter at all times. A minimum of 1 break slot is to be assigned to a game presenter during an entire shift.
 
-## Deploy on Vercel
+The time taken by a game presenter on a casino table or within a break slot must always be 20 minutes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The rotation of game presenters depends on the headcount per shift. The ideal number of game presenters per rotation is the number of tables + 1. If there are extra game presenters than the ideal number, then extra break slots would be given.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Task**
+You are required to implement an application using React Framework that implements the following:
+
+- [x]  List, create, view, edit and delete game presenters
+- [x]  Mock the backend API and set up mock data accordingly
+- [x]  Navigate between screens
+- [x]  List, create, view, edit and delete tables
+- [x]  Use proper validation techniques when creating and editing data
+- [x]  Compute the rotation schedule of game presenters for a single day (3 shifts) and display it on screen using components of your choice.
+
+## Solution Explanation
+
+The design of this application was built to make all processes intuitive for the user. Considering that the application has three fundamental axes (Game Presenters, Casino Tables & Scheduling System), three screens were developed to represent each of these axes, along with an initial screen (Home) where other types of information can be added in the future.
+
+The application follows a standard design composed of the Header, Sidebar, Maincontent, and Footer. Navigation between screens is done through the sidebar menu.
+
+The Game Presenters and Casino Tables screens have the same design to facilitate user understanding, with the only difference being the data related to each resource. Both screens list data related to each resource and allow management through CRUD operations, which are highly intuitive.
+
+On the Scheduling System screen, the initial rendering provides information to guide the user, buttons to display data according to each work shift, and quantitative data recorded in the system.
+
+After the user selects one of the three possible buttons (1st Shift, 2nd Shift, 3rd Shift), the table of Game Presenters vs. Casino Tables with time slots for each Game Presenter, as well as their Break times, will be displayed. If any of the work shifts do not have the ideal number of Game Presenter vs. Casino Tables, a notification screen with appropriate guidance and an option to add a new Game Presenter will be presented.
