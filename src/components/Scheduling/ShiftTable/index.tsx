@@ -109,6 +109,14 @@ export function ShiftTable() {
           : null
         }
         <div className='button-section'>
+          {selectedShift ?
+            <ButtonSelectShift
+              onSelect={selectedShift === ''}
+              shiftTitle="Return"
+              onClick={() => handleShiftSelection('')}
+            />
+            : null
+          }
           <ButtonSelectShift
             onSelect={selectedShift === '1'}
             shiftTitle="1st Shift"
@@ -127,7 +135,7 @@ export function ShiftTable() {
         </div>
       </ButtonsContainer>
 
-      {!shiftIdentification ? (
+      {!selectedShift ? (
         <Container>
           <TableContainerEmpty>
             <div>
@@ -149,7 +157,7 @@ export function ShiftTable() {
       )
         : null
       }
-      {!!shiftIdentification && !gamePresentersInsufficient ? (
+      {!!selectedShift && !gamePresentersInsufficient ? (
         <Container>
           <TableContainer>
             <table>
@@ -165,7 +173,7 @@ export function ShiftTable() {
         </Container>
       ) : null}
 
-      {!!shiftIdentification && gamePresentersInsufficient ? (
+      {!!selectedShift && gamePresentersInsufficient ? (
         <Container>
           <TableContainerEmpty>
             <div>

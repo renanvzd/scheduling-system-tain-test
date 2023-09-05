@@ -4,21 +4,21 @@
       "id": 1,
       "name": "GP 1",
       "age": "30",
-      "shift": "1",
-      "createdAt": "2023-31-08"
+      "createdAt": "2023-09-04",
+      "shift": "1"
     },
     {
       "name": "GP 2",
       "age": "35",
       "shift": "1",
-      "createdAt": "2023-01-09",
+      "createdAt": "2023-09-04",
       "id": 2
     },
     {
       "name": "GP 3",
       "age": "40",
       "shift": "1",
-      "createdAt": "2023-09-03",
+      "createdAt": "2023-09-04",
       "id": 3
     },
     {
@@ -32,14 +32,14 @@
       "name": "GP 5",
       "age": "30",
       "shift": "2",
-      "createdAt": "2023-31-08",
+      "createdAt": "2023-09-04",
       "id": 5
     },
     {
       "name": "GP 6",
       "age": "35",
       "shift": "2",
-      "createdAt": "2023-01-09",
+      "createdAt": "2023-09-04",
       "id": 6
     },
     {
@@ -60,14 +60,14 @@
       "name": "GP 9",
       "age": "30",
       "shift": "3",
-      "createdAt": "2023-31-08",
+      "createdAt": "2023-09-04",
       "id": 9
     },
     {
       "name": "GP 10",
       "age": "35",
       "shift": "3",
-      "createdAt": "2023-01-09",
+      "createdAt": "2023-09-04",
       "id": 10
     },
     {
@@ -79,10 +79,10 @@
     },
     {
       "name": "GP 12",
-      "age": "45",
-      "shift": "3",
-      "createdAt": "2023-09-04",
-      "id": 12
+      "age": "35",
+      "shift": "2",
+      "createdAt": "2023-09-05",
+      "id": 13
     }
   ],
   "casino-tables": [
