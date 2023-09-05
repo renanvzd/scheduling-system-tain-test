@@ -13,6 +13,8 @@ To ensure that the development environment uses the correct version of Node.js, 
 nvm use v18.12.0
 ```
 
+
+
 ### Install Node Modules Package
 
 ```bash
@@ -75,3 +77,20 @@ The Game Presenters and Casino Tables screens have the same design to facilitate
 On the Scheduling System screen, the initial rendering provides information to guide the user, buttons to display data according to each work shift, and quantitative data recorded in the system.
 
 After the user selects one of the three possible buttons (1st Shift, 2nd Shift, 3rd Shift), the table of Game Presenters vs. Casino Tables with time slots for each Game Presenter, as well as their Break times, will be displayed. If any of the work shifts do not have the ideal number of Game Presenter vs. Casino Tables, a notification screen with appropriate guidance and an option to add a new Game Presenter will be presented.
+
+
+<div align="center">
+    <img alt="Letmeask" src=".github/home.png" />
+</div>
+
+<div align="center">
+    <img alt="Letmeask" src=".github/scheduling.png" />
+</div>
+
+<div align="center">
+    <img alt="Letmeask" src=".github/first-shift.png" />
+</div>
+
+<div align="center">
+    <img alt="Letmeask" src=".github/third-shift.png" />
+</div>
